@@ -1,0 +1,44 @@
+interface InstagramFilter {
+  new(): any;
+}
+
+export const Willow: InstagramFilter;
+export const Lofi: InstagramFilter;
+export const Clarendon: InstagramFilter;
+export const Gingham: InstagramFilter;
+export const Moon: InstagramFilter;
+export const Lark: InstagramFilter;
+export const Reyes: InstagramFilter;
+export const Juno: InstagramFilter;
+export const Slumber: InstagramFilter;
+export const Crema: InstagramFilter;
+export const Ludwig: InstagramFilter;
+export const Aden: InstagramFilter;
+export const Perpetura: InstagramFilter;
+export const Amaro: InstagramFilter;
+export const Mayfair: InstagramFilter;
+export const Rise: InstagramFilter;
+export const Hudson: InstagramFilter;
+export const Valencia: InstagramFilter;
+export const Xpro: InstagramFilter;
+export const Sierra: InstagramFilter;
+export const Inkwell: InstagramFilter;
+export const Hefe: InstagramFilter;
+export const Nashville: InstagramFilter;
+export const Stinson: InstagramFilter;
+export const Vesper: InstagramFilter;
+export const Earlybird: InstagramFilter;
+export const Brannan: InstagramFilter;
+export const Sutro: InstagramFilter;
+export const Toaster: InstagramFilter;
+export const Walden: InstagramFilter;
+export const Year1977: InstagramFilter;
+export const Kelvin: InstagramFilter;
+export const Maven: InstagramFilter;
+export const Ginza: InstagramFilter;
+export const Skyline: InstagramFilter;
+export const Dogpatch: InstagramFilter;
+export const Brooklyn: InstagramFilter;
+export const Helena: InstagramFilter;
+export const Ashby: InstagramFilter;
+export const Charmes: InstagramFilter;
