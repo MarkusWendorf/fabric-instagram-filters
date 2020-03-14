@@ -21,8 +21,8 @@ const createFilter = (type, fragmentSource) => {
   return filter;
 };
 
-const baseFunctionsGLSL = contrastGLSL + colorFilterGLSL + grayscaleGLSL + invertGLSL + sepiaGLSL + brightnessGLSL + saturationGLSL;
-const fragmentSource = (color) => {
+const baseFunctionsGLSL = contrastGLSL + colorFilterGLSL + grayscaleGLSL + invertGLSL + sepiaGLSL + brightnessGLSL + saturationGLSL + rgbAdjustGLSL;
+const fragmentSrc = (color) => {
   return "precision highp float;\n" +
     "uniform sampler2D uTexture;\n" +
     "varying vec2 vTexCoord;\n" +
@@ -33,46 +33,46 @@ const fragmentSource = (color) => {
     "}";
 };
 
-const willowFragmentSource = fragmentSource("brightness(colorFilter(grayscale(color), vec4(100.0, 28.0, 210.0, 0.1)), 0.1)");
-const lofiFragmentSource = fragmentSource("saturation(contrast(color, 0.15), 0.2)");
-const clarendonFragmentSource = fragmentSource("saturation(contrast(brightness(color, 0.1), 0.1), 0.15)");
-const ginghamFragmentSource = fragmentSource("contrast(sepia(color, 0.04), -0.15)");
-const moonFragmentSource = fragmentSource("brightness(contrast(grayscale(color), -0.04), 0.1)");
-const larkFragmentSource = fragmentSource("saturation(rgbAdjust(brightness(color, 0.08), vec3(1, 1.03, 1.05)), 0.12)");
-const reyesFragmentSource = fragmentSource("contrast(brightness(sepia(color, 0.4), 0.13), -0.05)");
-const junoFragmentSource = fragmentSource("saturation(rgbAdjust(color, vec3(1.01, 1.04, 1)), 0.3)");
-const slumberFragmentSource = fragmentSource("saturation(brightness(color, 0.1), -0.5)");
-const cremaFragmentSource = fragmentSource("saturation(rgbAdjust(color, vec3(1.04, 1, 1.02)), -0.05)");
-const ludwigFragmentSource = fragmentSource("saturation(brightness(color, 0.05), -0.03)");
-const adenFragmentSource = fragmentSource("saturation(colorFilter(color, vec4(228, 130, 225, 0.13)), -0.2)");
-const perpetuaFragmentSource = fragmentSource("rgbAdjust(color, vec3(1.05, 1.1, 1))");
-const amaroFragmentSource = fragmentSource("brightness(saturation(color, 0.3), 0.15)");
-const mayfairFragmentSource = fragmentSource("saturation(colorFilter(color, vec4(230, 115, 108, 0.05)), 0.15)");
-const riseFragmentSource = fragmentSource("saturation(brightness(colorFilter(color, vec4(255, 170, 0, 0.1)), 0.09), 0.1)");
-const hudsonFragmentSource = fragmentSource("brightness(contrast(rgbAdjust(color, vec3(1, 1, 1.25)), 0.1), 0.15)");
-const valenciaFragmentSource = fragmentSource("contrast(saturation(colorFilter(color, vec4(255, 225, 80, 0.08)), 0.1), 0.05)");
-const xproFragmentSource = fragmentSource("contrast(saturation(colorFilter(color, vec4(255, 255, 0, 0.07)), 0.2), 0.15)");
-const sierraFragmentSource = fragmentSource("saturation(contrast(color, -0.15), 0.1)");
-const inkwellFragmentSource = fragmentSource("grayscale(color)");
-const hefeFragmentSource = fragmentSource("saturation(contrast(color, 0.1), 0.15)");
-const nashvilleFragmentSource = fragmentSource("contrast(colorFilter(color, vec4(220, 115, 188, 0.12)), -0.05)");
-const stinsonFragmentSource = fragmentSource("sepia(brightness(color, 0.1), 0.3)");
-const vesperFragmentSource = fragmentSource("contrast(brightness(colorFilter(color, vec4(255, 225, 0, 0.05)), 0.06), 0.06)");
-const earlybirdFragmentSource = fragmentSource("colorFilter(color, vec4(255, 165, 40, 0.2))");
-const brannanFragmentSource = fragmentSource("colorFilter(contrast(color, 0.2), vec4(140, 10, 185, 0.1))");
-const sutroFragmentSource = fragmentSource("saturation(brightness(color, -0.1), -0.1)");
-const toasterFragmentSource = fragmentSource("colorFilter(sepia(color, 0.1), vec4(255, 145, 0, 0.2))");
-const waldenFragmentSource = fragmentSource("colorFilter(brightness(color, 0.1), vec4(255, 255, 0, 0.2))");
-const year1977FragmentSource = fragmentSource("brightness(colorFilter(color, vec4(255, 25, 0, 0.15)), 0.1)");
-const kelvinFragmentSource = fragmentSource("saturation(rgbAdjust(colorFilter(color, vec4(255, 140, 0, 0.1)), vec3(1.15, 1.05, 1)), 0.35)");
-const mavenFragmentSource = fragmentSource("contrast(saturation(colorFilter(color, vec4(225, 240, 0, 0.1)), 0.25), 0.05)");
-const ginzaFragmentSource = fragmentSource("brightness(sepia(color, 0.06), 0.1)");
-const skylineFragmentSource = fragmentSource("brightness(saturation(color, 0.35), 0.1)");
-const dogpatchFragmentSource = fragmentSource("brightness(contrast(color, 0.15), 0.1)");
-const brooklynFragmentSource = fragmentSource("sepia(colorFilter(color, vec4(25, 240, 252, 0.05)), 0.3)");
-const helenaFragmentSource = fragmentSource("contrast(colorFilter(color, vec4(208, 208, 86, 0.2)), 0.15)");
-const ashbyFragmentSource = fragmentSource("brightness(colorFilter(color, vec4(255, 160, 25, 0.1)), 0.1)");
-const charmesFragmentSource = fragmentSource("contrast(colorFilter(color, vec4(255, 50, 80, 0.12)), 0.05)");
+const willowFragmentSource = fragmentSrc("brightness(colorFilter(grayscale(color), vec4(100.0, 28.0, 210.0, 0.1)), 0.1)");
+const lofiFragmentSource = fragmentSrc("saturation(contrast(color, 0.15), 0.2)");
+const clarendonFragmentSource = fragmentSrc("saturation(contrast(brightness(color, 0.1), 0.1), 0.15)");
+const ginghamFragmentSource = fragmentSrc("contrast(sepia(color, 0.04), -0.15)");
+const moonFragmentSource = fragmentSrc("brightness(contrast(grayscale(color), -0.04), 0.1)");
+const larkFragmentSource = fragmentSrc("saturation(rgbAdjust(brightness(color, 0.08), vec3(1.0, 1.03, 1.05)), 0.12)");
+const reyesFragmentSource = fragmentSrc("contrast(brightness(sepia(color, 0.4), 0.13), -0.05)");
+const junoFragmentSource = fragmentSrc("saturation(rgbAdjust(color, vec3(1.01, 1.04, 1.0)), 0.3)");
+const slumberFragmentSource = fragmentSrc("saturation(brightness(color, 0.1), -0.5)");
+const cremaFragmentSource = fragmentSrc("saturation(rgbAdjust(color, vec3(1.04, 1.0, 1.02)), -0.05)");
+const ludwigFragmentSource = fragmentSrc("saturation(brightness(color, 0.05), -0.03)");
+const adenFragmentSource = fragmentSrc("saturation(colorFilter(color, vec4(228.0, 130.0, 225.0, 0.13)), -0.2)");
+const perpetuaFragmentSource = fragmentSrc("rgbAdjust(color, vec3(1.05, 1.1, 1.0))");
+const amaroFragmentSource = fragmentSrc("brightness(saturation(color, 0.3), 0.15)");
+const mayfairFragmentSource = fragmentSrc("saturation(colorFilter(color, vec4(230.0, 115.0, 108.0, 0.05)), 0.15)");
+const riseFragmentSource = fragmentSrc("saturation(brightness(colorFilter(color, vec4(255.0, 170.0, 0.0, 0.1)), 0.09), 0.1)");
+const hudsonFragmentSource = fragmentSrc("brightness(contrast(rgbAdjust(color, vec3(1, 1, 1.25)), 0.1), 0.15)");
+const valenciaFragmentSource = fragmentSrc("contrast(saturation(colorFilter(color, vec4(255.0, 225.0, 80.0, 0.08)), 0.1), 0.05)");
+const xproFragmentSource = fragmentSrc("contrast(saturation(colorFilter(color, vec4(255.0, 255.0, 0.0, 0.07)), 0.2), 0.15)");
+const sierraFragmentSource = fragmentSrc("saturation(contrast(color, -0.15), 0.1)");
+const inkwellFragmentSource = fragmentSrc("grayscale(color)");
+const hefeFragmentSource = fragmentSrc("saturation(contrast(color, 0.1), 0.15)");
+const nashvilleFragmentSource = fragmentSrc("contrast(colorFilter(color, vec4(220.0, 115.0, 188.0, 0.12)), -0.05)");
+const stinsonFragmentSource = fragmentSrc("sepia(brightness(color, 0.1), 0.3)");
+const vesperFragmentSource = fragmentSrc("contrast(brightness(colorFilter(color, vec4(255.0, 225.0, 0.0, 0.05)), 0.06), 0.06)");
+const earlybirdFragmentSource = fragmentSrc("colorFilter(color, vec4(255.0, 165.0, 40.0, 0.2))");
+const brannanFragmentSource = fragmentSrc("colorFilter(contrast(color, 0.2), vec4(140.0, 10.0, 185.0, 0.1))");
+const sutroFragmentSource = fragmentSrc("saturation(brightness(color, -0.1), -0.1)");
+const toasterFragmentSource = fragmentSrc("colorFilter(sepia(color, 0.1), vec4(255.0, 145.0, 0.0, 0.2))");
+const waldenFragmentSource = fragmentSrc("colorFilter(brightness(color, 0.1), vec4(255.0, 255.0, 0.0, 0.2))");
+const year1977FragmentSource = fragmentSrc("brightness(colorFilter(color, vec4(255.0, 25.0, 0.0, 0.15)), 0.1)");
+const kelvinFragmentSource = fragmentSrc("saturation(rgbAdjust(colorFilter(color, vec4(255.0, 140.0, 0.0, 0.1)), vec3(1.15, 1.05, 1)), 0.35)");
+const mavenFragmentSource = fragmentSrc("contrast(saturation(colorFilter(color, vec4(225.0, 240.0, 0.0, 0.1)), 0.25), 0.05)");
+const ginzaFragmentSource = fragmentSrc("brightness(sepia(color, 0.06), 0.1)");
+const skylineFragmentSource = fragmentSrc("brightness(saturation(color, 0.35), 0.1)");
+const dogpatchFragmentSource = fragmentSrc("brightness(contrast(color, 0.15), 0.1)");
+const brooklynFragmentSource = fragmentSrc("sepia(colorFilter(color, vec4(25.0, 240.0, 252.0, 0.05)), 0.3)");
+const helenaFragmentSource = fragmentSrc("contrast(colorFilter(color, vec4(208.0, 208.0, 86.0, 0.2)), 0.15)");
+const ashbyFragmentSource = fragmentSrc("brightness(colorFilter(color, vec4(255.0, 160.0, 25.0, 0.1)), 0.1)");
+const charmesFragmentSource = fragmentSrc("contrast(colorFilter(color, vec4(255.0, 50.0, 80.0, 0.12)), 0.05)");
 
 export const Willow = createFilter("Willow", willowFragmentSource);
 export const Lofi = createFilter("Lofi", lofiFragmentSource);
